@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DetalleUsuarioActivity">
+
+    <TextView
+        android:id="@+id/txtid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="ID:"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txtname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Nombre:"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txuser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="User:"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Password"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txtrol"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Rol:"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txtidestado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Estado:"
+        android:textSize="20sp" />
+
+</LinearLayout>

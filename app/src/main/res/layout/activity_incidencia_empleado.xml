@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dkkd"
+    tools:context=".IncidenciaEmpleado">
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="137dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins"
+        android:text="Estado"
+        android:textColor="#0C0C0C"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.696"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/txtdescrip" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Incidencias"
+        android:textAlignment="center"
+        android:textColor="#020202"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/poppins"
+        android:text="Usuario"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins"
+        android:text="Fecha"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtdescrip" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="188dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/poppins"
+        android:text="Tipo incidente"
+        android:textColor="#0C0C0C"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/txtusuario"
+        android:layout_width="132dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/editext_background"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <Spinner
+        android:id="@+id/spestadoincidencia"
+        android:layout_width="182dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/editext_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.754"
+        app:layout_constraintStart_toEndOf="@+id/txFecha"
+        app:layout_constraintTop_toBottomOf="@+id/txtdescrip" />
+
+    <EditText
+        android:id="@+id/txtdescrip"
+        android:layout_width="349dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/editext_background"
+        android:ems="10"
+        android:fontFamily="sans-serif-black"
+        android:hint="Descripcion"
+        android:inputType="textPersonName"
+        android:textColor="#0B0A0A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtusuario" />
+
+    <EditText
+        android:id="@+id/txFecha"
+        android:layout_width="124dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="36dp"
+        android:background="@drawable/editext_background"
+        android:ems="10"
+        android:fontFamily="sans-serif"
+        android:inputType="date"
+        android:textColor="#171717"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <Spinner
+        android:id="@+id/sptipoincidencia"
+        android:layout_width="181dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/editext_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toEndOf="@+id/txtfecha"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="185dp"
+        android:layout_height="154dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txFecha"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btnRegistrar1"
+        android:layout_width="202dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/editext_background"
+        android:fontFamily="@font/poppins"
+        android:text="Registrar"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <Button
+        android:id="@+id/btnFoto1"
+        android:layout_width="143dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/editext_background"
+        android:fontFamily="@font/poppins"
+        android:text="Tomar Foto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/spestadoincidencia" />
+</androidx.constraintlayout.widget.ConstraintLayout>
