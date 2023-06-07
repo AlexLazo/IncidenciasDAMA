@@ -19,9 +19,6 @@
             android:name=".ModificarIncidenciaAdministrador"
             android:exported="false" />
         <activity
-            android:name=".ModificarIncidencia"
-            android:exported="false" />
-        <activity
             android:name=".DetalleUsuarioActivity"
             android:exported="false" />
         <activity

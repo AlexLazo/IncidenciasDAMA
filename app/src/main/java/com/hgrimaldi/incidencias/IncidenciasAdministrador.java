@@ -1,20 +1,35 @@
 package com.hgrimaldi.incidencias;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +47,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -53,19 +70,16 @@ public class IncidenciasAdministrador extends AppCompatActivity {
     int id_tipoincidencia;
 
     int id_estadoincidencia;
-
-    String currentPhotoPath;
-
-    static final int REQUEST_PERMISSION_CAMERA = 100;
-    static final int REQUEST_TAKE_PHOTO = 101;
+    Bitmap bitmap ,decode;
+    int PICK_IMAGE_REQUEST = 1;
 
     TextView usuario;
-
+    ImageView imageView;
     EditText date,descripcion;
-
-
     Spinner tipoIncidencia,EstadoIncidencia;
+    Button tomarfoto,registrar;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +89,7 @@ public class IncidenciasAdministrador extends AppCompatActivity {
 
         usuario = findViewById(R.id.txtUser);
         descripcion = findViewById(R.id.txtdescripcion);
+        imageView = findViewById(R.id.imgFoto);
         date = findViewById(R.id.txtfecha);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +105,8 @@ public class IncidenciasAdministrador extends AppCompatActivity {
         });
         tipoIncidencia = findViewById(R.id.spTtipoIncidencia);
         EstadoIncidencia = findViewById(R.id.spEstado);
-        String url = "http://192.168.0.184/app_incidencias/incidencia/listarTipo.php";
-        String url1 = "http://192.168.0.184/app_incidencias/incidencia/listarEstado.php";
+        String url = "http://192.168.101.11:80/app_incidencias/incidencia/listarTipo.php";
+        String url1 = "http://192.168.101.11:80/app_incidencias/incidencia/listarEstado.php";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -143,6 +158,20 @@ public class IncidenciasAdministrador extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest1);
         selectIdEstadoIncidencia();
         selectIdTipoIncidencia();
+        tomarfoto = findViewById(R.id.btnFoto2);
+        tomarfoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFileChooser();
+            }
+        });
+        registrar = findViewById(R.id.btnResgistrar2);
+        registrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insertarIncidencia();
+            }
+        });
 
     }
 
@@ -175,11 +204,39 @@ public class IncidenciasAdministrador extends AppCompatActivity {
 
     }
 
+    private String getStringImage(Bitmap bitmap){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodeImage = Base64.encodeToString(imageBytes,Base64.DEFAULT);
+        return encodeImage;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
+            Uri filePath = data.getData();
+            try{
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
+                imageView.setImageBitmap(bitmap);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    private void showFileChooser(){
+        Intent intent = new Intent();
+        intent.setType("image/");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"selecciona imagen"),PICK_IMAGE_REQUEST);
+    }
+
     private void insertarIncidencia() {
 
-        final String user = usuario.getText().toString().trim();
         final String descrip = descripcion.getText().toString().trim();
-        final String fecha = date.getText().toString().trim();
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
@@ -193,7 +250,7 @@ public class IncidenciasAdministrador extends AppCompatActivity {
 
         else{
             progressDialog.show();
-            StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.0.184/app_incidencias/incidencia/insert.php",
+            StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.101.11:80/app_incidencias/incidencia/insert.php",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -221,13 +278,20 @@ public class IncidenciasAdministrador extends AppCompatActivity {
             ){
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
+                    String imagen =getStringImage(bitmap);
+                    String usuario="usuario";
+                    String fecha = date.getText().toString().trim();
+                    SharedPreferences sharedPreferences=getSharedPreferences(usuario, Context.MODE_PRIVATE);
+                    String idUsuarioSesion = sharedPreferences.getString("idUsuario", "");
                     Map<String, String> params = new HashMap<String, String>();
 
 
-                    params.put("id_usuario",user);
+
+                    params.put("id_usuario",idUsuarioSesion);
                     params.put("id_tipoIncidencia", String.valueOf(id_tipoincidencia));
                     params.put("descripcion",descrip);
-                    params.put("fecha", String.valueOf(date));params.put("imagenReferencia","aj");
+                    params.put("fecha", fecha);
+                    params.put("imagenReferencia",imagen);
                     params.put("estadoIncidencia","3");
                     return params;
                 }
@@ -237,42 +301,6 @@ public class IncidenciasAdministrador extends AppCompatActivity {
 
         }
 
-    }
-
-    private File createImageFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-        String imageFileName = "JPEG" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName, "jpg",
-                storageDir
-        );
-        currentPhotoPath = image.getAbsolutePath();
-        return  image;
-    }
-
-    private void takePintureFullSize(){
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (intent.resolveActivity(getPackageManager())!=null){
-            File photoFile = null;
-
-            try {
-                photoFile = createImageFile();
-
-            }catch (Exception e){
-                e.getMessage();
-            }
-            if(photoFile !=null){
-                Uri photoUri = FileProvider.getUriForFile(
-                        IncidenciasAdministrador.this,
-                        "com.hgrimaldi.incidencias",
-                        photoFile
-                );
-
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri);
-                startActivityForResult(intent, REQUEST_TAKE_PHOTO);
-            }
-        }
     }
 
     @Override
