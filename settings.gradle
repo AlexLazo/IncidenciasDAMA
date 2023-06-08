@@ -1,8 +1,9 @@
 pluginManagement {
     repositories {
-        google()
+        jcenter()
+        //add these two lines here
         mavenCentral()
-        gradlePluginPortal()
+        maven { url 'https://maven.google.com' }
     }
 }
 dependencyResolutionManagement {

@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 public class AdministradorActivity extends AppCompatActivity {
-    ImageView incidencia,usuario;
+    ImageView incidencia,usuario, inciRegis;
 
     private Button btnLogout;
 
@@ -56,13 +56,20 @@ public class AdministradorActivity extends AppCompatActivity {
                 });
 
                 incidencia = findViewById(R.id.vinci);
-
-
                 incidencia.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent incidenciaActivity = new Intent(AdministradorActivity.this, IncidenciasAdministrador.class);
                         startActivity(incidenciaActivity);
+                    }
+                });
+
+                inciRegis = findViewById(R.id.vinciRegis);
+                inciRegis.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent IncidenciasRegisActivity = new Intent(AdministradorActivity.this, RegistrosActivity.class);
+                        startActivity(IncidenciasRegisActivity);
                     }
                 });
     }

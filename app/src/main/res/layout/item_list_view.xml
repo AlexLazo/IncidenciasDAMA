@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:backgroundTint="?attr/colorControlHighlight"
+        android:hapticFeedbackEnabled="false"
+        android:padding="8dp">
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="131dp"
+            android:layout_height="151dp"
+            android:padding="4dp" />
+
+        <TextView
+            android:id="@+id/tvDescripcion"
+            android:layout_width="127dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/imageView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/tvTipoIncidencia"
+            android:layout_width="244dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvDescripcion"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@id/imageView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/tvUser"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTipoIncidencia"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="9dp"
+            android:layout_toRightOf="@id/imageView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+
+        <TextView
+            android:id="@+id/tvFecha"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvUser"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="11dp"
+            android:layout_toRightOf="@id/imageView"
+            android:background="@color/colorPrimary"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvEstadoIncidencia"
+            android:layout_width="133dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvFecha"
+            android:layout_marginLeft="19dp"
+            android:layout_marginTop="12dp"
+            android:layout_toRightOf="@id/imageView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</LinearLayout>

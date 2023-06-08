@@ -226,7 +226,8 @@ public class IncidenciaEmpleado extends AppCompatActivity {
                     params.put("id_usuario",user);
                     params.put("id_tipoIncidencia", String.valueOf(id_tipoincidencia));
                     params.put("descripcion",descrip);
-                    params.put("fecha", String.valueOf(date));params.put("imagenReferencia","aj");
+                    params.put("fecha", String.valueOf(date));
+                    params.put("imagenReferencia","aj");
                     params.put("estadoIncidencia","3");
                     return params;
                 }
