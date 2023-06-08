@@ -20,8 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegistrosActivity extends AppCompatActivity {
-    //this is the JSON Data URL
-    //make sure you are using the correct ip else it will not work
     private static final String URL_PRODUCTS = "http://192.168.0.184:80/app_incidencias/incidencia/incidencia.php";
     List<ItemList> incidenciaList;
     RecyclerView recyclerView;
