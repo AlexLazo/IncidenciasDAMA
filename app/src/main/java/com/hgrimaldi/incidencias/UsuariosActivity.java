@@ -114,8 +114,6 @@ public class UsuariosActivity extends AppCompatActivity {
                         }
                         Intent myIntent = new Intent(context,MainActivity.class);
                         context.startActivity(myIntent);
-
-
                     }
                 }, new Response.ErrorListener() {
             @Override

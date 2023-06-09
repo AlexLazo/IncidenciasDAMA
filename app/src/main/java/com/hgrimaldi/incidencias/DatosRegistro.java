@@ -2,7 +2,9 @@ package com.hgrimaldi.incidencias;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,6 +42,21 @@ public class DatosRegistro extends AppCompatActivity {
         btnEditar = findViewById(R.id.btnEditarRegis);
         btnEliminar = findViewById(R.id.btnEliminarRegis);
 
+        btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent DatosRegistro = new Intent(DatosRegistro.this, ModificarRegistro.class);
+                startActivity(DatosRegistro);
+            }
+        });
+
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
+
 }
