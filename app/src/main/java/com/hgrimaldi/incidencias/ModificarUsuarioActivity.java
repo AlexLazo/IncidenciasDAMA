@@ -77,8 +77,8 @@ public class ModificarUsuarioActivity extends AppCompatActivity {
         id_RolActual =(UsuariosActivity.usuarioArrayList.get(position).getId_rol());
         id_EstadoActual = (UsuariosActivity.usuarioArrayList.get(position).getId_estadoEmpleado());
 
-        String url3 = "http://192.168.0.184/app_incidencias/usuario/listarRol.php";
-        String url4 = "http://192.168.0.184/app_incidencias/usuario/listarEstado.php";
+        String url3 = "https://damaapirest.000webhostapp.com/usuario/listarRol.php";
+        String url4 = "https://damaapirest.000webhostapp.com/usuario/listarEstado.php";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url3, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -200,7 +200,7 @@ public class ModificarUsuarioActivity extends AppCompatActivity {
         progressDialog.setMessage("Actualizando....");
         progressDialog.show();
 
-        StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.0.184/app_incidencias/usuario/update.php",
+        StringRequest request = new StringRequest(Request.Method.POST, "https://damaapirest.000webhostapp.com/usuario/update.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

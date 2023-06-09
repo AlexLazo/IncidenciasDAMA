@@ -90,8 +90,8 @@ public class IncidenciaEmpleado extends AppCompatActivity {
         });
         tipoIncidencia = findViewById(R.id.sptipoincidencia);
         EstadoIncidencia = findViewById(R.id.spestadoincidencia);
-        String url = "http://192.168.0.184/app_incidencias/incidencia/listarTipo.php";
-        String url1 = "http://192.168.0.184/app_incidencias/incidencia/listarEstado.php";
+        String url = "https://damaapirest.000webhostapp.com/incidencia/listarTipo.php";
+        String url1 = "https://damaapirest.000webhostapp.com/incidencia/listarEstado.php";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -192,7 +192,7 @@ public class IncidenciaEmpleado extends AppCompatActivity {
 
         else{
             progressDialog.show();
-            StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.0.184/app_incidencias/incidencia/insert.php",
+            StringRequest request = new StringRequest(Request.Method.POST, "https://damaapirest.000webhostapp.com/incidencia/insert.php",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

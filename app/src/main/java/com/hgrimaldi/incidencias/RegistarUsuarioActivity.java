@@ -181,7 +181,7 @@ public class RegistarUsuarioActivity extends AppCompatActivity {
 
         else{
             progressDialog.show();
-            StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.0.184/app_incidencias/usuario/insert.php",
+            StringRequest request = new StringRequest(Request.Method.POST, "https://damaapirest.000webhostapp.com/usuario/insert.php",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

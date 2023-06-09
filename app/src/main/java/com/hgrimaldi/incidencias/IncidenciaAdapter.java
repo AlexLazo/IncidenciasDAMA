@@ -28,7 +28,7 @@ public class IncidenciaAdapter extends RecyclerView.Adapter<IncidenciaAdapter.Pr
     private Context mCtx;
     private List<ItemList> incidenciaList;
 
-    private String domaing_image = "http://192.168.0.184:80/app_incidencias/incidencia/fotos/";
+    private String domaing_image = "https://damaapirest.000webhostapp.com/incidencia/fotos/";
 
     public IncidenciaAdapter(Context mCtx, List<ItemList> incidenciaList) {
         this.mCtx = mCtx;

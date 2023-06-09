@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegistrosActivity extends AppCompatActivity {
-    private static final String URL_PRODUCTS = "http://192.168.0.184:80/app_incidencias/incidencia/incidencia.php";
+    private static final String URL_PRODUCTS = "https://damaapirest.000webhostapp.com/incidencia/incidencia.php";
     List<ItemList> incidenciaList;
     RecyclerView recyclerView;
 
