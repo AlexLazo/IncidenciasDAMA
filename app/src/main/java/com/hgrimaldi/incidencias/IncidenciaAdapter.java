@@ -18,28 +18,32 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Response;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class IncidenciaAdapter extends RecyclerView.Adapter<IncidenciaAdapter.ProductViewHolder> {
+class IncidenciaAdapter extends RecyclerView.Adapter<IncidenciaAdapter.ProductViewHolder> {
+    private  final RecyclerViewInterface recyclerViewInterface;
     private Context mCtx;
     private List<ItemList> incidenciaList;
 
     private String domaing_image = "https://damaapirest.000webhostapp.com/incidencia/fotos/";
 
-    public IncidenciaAdapter(Context mCtx, List<ItemList> incidenciaList) {
+    public IncidenciaAdapter(Context mCtx, List<ItemList> incidenciaList,
+                             RecyclerViewInterface recyclerViewInterface) {
         this.mCtx = mCtx;
         this.incidenciaList = incidenciaList;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.item_list_view, null);
-        return new ProductViewHolder(view);
+        return new ProductViewHolder(view, recyclerViewInterface);
     }
 
     @Override
@@ -68,7 +72,8 @@ public class IncidenciaAdapter extends RecyclerView.Adapter<IncidenciaAdapter.Pr
         TextView textViewDescripcion, textViewFecha, textViewTipo, textViewEstado, textViewUser;
         ImageView imageView;
 
-        public ProductViewHolder(View itemView) {
+        public ProductViewHolder(View itemView,
+                                 RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
 
             textViewDescripcion = itemView.findViewById(R.id.tvDescripcion);
@@ -77,6 +82,19 @@ public class IncidenciaAdapter extends RecyclerView.Adapter<IncidenciaAdapter.Pr
             textViewEstado = itemView.findViewById(R.id.tvEstadoIncidencia);
             textViewUser = itemView.findViewById(R.id.tvUser);
             imageView = itemView.findViewById(R.id.imageView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (recyclerViewInterface != null){
+                        int pos = getAdapterPosition();
+
+                        if (pos != RecyclerView.NO_POSITION){
+                            recyclerViewInterface.onItemClick(pos);
+                        }
+                    }
+                }
+            });
         }
     }
 }

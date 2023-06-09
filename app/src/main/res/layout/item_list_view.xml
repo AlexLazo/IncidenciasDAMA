@@ -9,6 +9,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/row_color"
         android:hapticFeedbackEnabled="false"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:padding="5dp">
 
 
@@ -18,11 +22,12 @@
             android:layout_height="121dp"
             android:padding="4dp" />
 
+
         <TextView
             android:id="@+id/tvDescripcion"
             android:layout_width="127dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="14dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="8dp"
             android:layout_toRightOf="@id/imageView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
@@ -33,13 +38,12 @@
             android:layout_width="244dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvDescripcion"
-            android:layout_marginLeft="14dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="0dp"
             android:layout_toRightOf="@id/imageView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textSize="16sp"
             android:textStyle="bold|italic" />
-
 
         <TextView
             android:id="@+id/tvUser"

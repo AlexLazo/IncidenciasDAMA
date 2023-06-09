@@ -1,9 +1,12 @@
 package com.hgrimaldi.incidencias;
 
+import static android.media.CamcorderProfile.get;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -19,7 +22,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegistrosActivity extends AppCompatActivity {
+public class RegistrosActivity extends AppCompatActivity
+            implements RecyclerViewInterface{
     private static final String URL_PRODUCTS = "https://damaapirest.000webhostapp.com/incidencia/incidencia.php";
     List<ItemList> incidenciaList;
     RecyclerView recyclerView;
@@ -61,7 +65,8 @@ public class RegistrosActivity extends AppCompatActivity {
                                 ));
                             }
 
-                            IncidenciaAdapter adapter = new IncidenciaAdapter(RegistrosActivity.this, incidenciaList);
+                            IncidenciaAdapter adapter = new IncidenciaAdapter(
+                                    RegistrosActivity.this, incidenciaList, RegistrosActivity.this);
                             recyclerView.setAdapter(adapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -76,5 +81,17 @@ public class RegistrosActivity extends AppCompatActivity {
                 });
 
         Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        //Intent intent = new Intent(RegistrosActivity.this, DatosRegistro.class);
+
+        //intent.putExtra("descripcion", incidenciaList,get(position).getDescripcion());
+        //intent.putExtra("fecha", incidenciaList,get(position).getFecha());
+        //intent.putExtra("user", incidenciaList,get(position).getUser());
+        //intent.putExtra("TipoIncidencia", incidenciaList,get(position).getTipo());
+        //intent.putExtra("EstadoIncidencia", incidenciaList,get(position).getEstado());
+        //intent.putExtra("imagenReferencia", incidenciaList,get(position).getImagen());
     }
 }
