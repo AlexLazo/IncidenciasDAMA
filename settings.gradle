@@ -1,16 +1,14 @@
 pluginManagement {
     repositories {
+        google()
         jcenter()
-        //add these two lines here
-        mavenCentral()
-        maven { url 'https://maven.google.com' }
     }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
-        mavenCentral()
+        jcenter()
     }
 }
 rootProject.name = "Incidencias"

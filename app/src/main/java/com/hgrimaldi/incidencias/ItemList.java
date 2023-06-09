@@ -9,8 +9,9 @@ public class ItemList implements Serializable {
     private String fecha;
     private String user;
     private String EstadoIncidencia;
+    private int id_incidencia;
 
-    public ItemList(String TipoIncidencia, String descripcion, String imagenReferencia
+    public ItemList(int id_incidencia, String TipoIncidencia, String descripcion, String imagenReferencia
     , String fecha, String user, String EstadoIncidencia) {
         this.descripcion = descripcion;
         this.fecha = fecha;
@@ -32,4 +33,6 @@ public class ItemList implements Serializable {
         return TipoIncidencia;
     }
     public String getEstadoIncidencia(){ return  EstadoIncidencia;}
+
+    public int getId_incidencia(){return id_incidencia;}
 }

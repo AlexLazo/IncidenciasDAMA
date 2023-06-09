@@ -1,17 +1,17 @@
 package com.hgrimaldi.incidencias;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-
 import com.android.volley.Request;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.android.volley.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,9 +19,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.bumptech.glide.Glide;
-import com.hgrimaldi.incidencias.ItemList;
 public class RegistrosActivity extends AppCompatActivity
             implements RecyclerViewInterface{
     private static final String URL_PRODUCTS = "https://damaapirest.000webhostapp.com/incidencia/incidencia.php";
@@ -56,6 +53,7 @@ public class RegistrosActivity extends AppCompatActivity
                                 JSONObject items = array.getJSONObject(i);
 
                                 incidenciaList.add(new ItemList (
+                                        items.getInt("id_incidencia"),
                                         items.getString("descripcion"),
                                         items.getString("fecha"),
                                         items.getString("imagenReferencia"),
@@ -85,16 +83,15 @@ public class RegistrosActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(int position) {
-
         Intent intent = new Intent(RegistrosActivity.this, DatosRegistro.class);
 
+        intent.putExtra("id_incidencia", incidenciaList.get(position).getId_incidencia());
         intent.putExtra("descripcion", incidenciaList.get(position).getDescripcion());
         intent.putExtra("fecha", incidenciaList.get(position).getFecha());
         intent.putExtra("user", incidenciaList.get(position).getuser());
         intent.putExtra("TipoIncidencia", incidenciaList.get(position).getTipo());
         intent.putExtra("EstadoIncidencia", incidenciaList.get(position).getEstadoIncidencia());
         intent.putExtra("imagenReferencia", incidenciaList.get(position).getImage());
-
 
         startActivity(intent);
     }

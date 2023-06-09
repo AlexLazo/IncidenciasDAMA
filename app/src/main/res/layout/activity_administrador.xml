@@ -7,6 +7,17 @@
     android:background="@drawable/background"
     tools:context=".AdministradorActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/fab_margin"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_dialog_email" />
     <TextView
         android:id="@+id/title_view"
         android:layout_width="wrap_content"
@@ -113,8 +124,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="26dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="77dp"
         android:backgroundTint="@color/black"
         android:padding="15dp"
         android:text="Cerrar sesión"
