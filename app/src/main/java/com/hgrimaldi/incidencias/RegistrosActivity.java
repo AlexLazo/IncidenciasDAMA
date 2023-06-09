@@ -1,7 +1,5 @@
 package com.hgrimaldi.incidencias;
 
-import static android.media.CamcorderProfile.get;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +20,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bumptech.glide.Glide;
+import com.hgrimaldi.incidencias.ItemList;
 public class RegistrosActivity extends AppCompatActivity
             implements RecyclerViewInterface{
     private static final String URL_PRODUCTS = "https://damaapirest.000webhostapp.com/incidencia/incidencia.php";
@@ -85,13 +85,17 @@ public class RegistrosActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(int position) {
-        //Intent intent = new Intent(RegistrosActivity.this, DatosRegistro.class);
 
-        //intent.putExtra("descripcion", incidenciaList,get(position).getDescripcion());
-        //intent.putExtra("fecha", incidenciaList,get(position).getFecha());
-        //intent.putExtra("user", incidenciaList,get(position).getUser());
-        //intent.putExtra("TipoIncidencia", incidenciaList,get(position).getTipo());
-        //intent.putExtra("EstadoIncidencia", incidenciaList,get(position).getEstado());
-        //intent.putExtra("imagenReferencia", incidenciaList,get(position).getImagen());
+        Intent intent = new Intent(RegistrosActivity.this, DatosRegistro.class);
+
+        intent.putExtra("descripcion", incidenciaList.get(position).getDescripcion());
+        intent.putExtra("fecha", incidenciaList.get(position).getFecha());
+        intent.putExtra("user", incidenciaList.get(position).getuser());
+        intent.putExtra("TipoIncidencia", incidenciaList.get(position).getTipo());
+        intent.putExtra("EstadoIncidencia", incidenciaList.get(position).getEstadoIncidencia());
+        intent.putExtra("imagenReferencia", incidenciaList.get(position).getImage());
+
+
+        startActivity(intent);
     }
 }
