@@ -2,6 +2,7 @@ package com.hgrimaldi.incidencias;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,9 +21,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-public class RegistrosActivity extends AppCompatActivity
-            implements RecyclerViewInterface{
-    private static final String URL_PRODUCTS = "https://damaapirest.000webhostapp.com/incidencia/incidencia.php";
+public class RegistrosActivity extends AppCompatActivity implements RecyclerViewInterface{
+    private static final String URL_PRODUCTS = "http://192.168.0.184/app_incidencias/incidencia/incidencia.php";
     List<ItemList> incidenciaList;
     RecyclerView recyclerView;
 
@@ -37,35 +38,43 @@ public class RegistrosActivity extends AppCompatActivity
         incidenciaList = new ArrayList<>();
 
         loadProducts();
+
+        FloatingActionButton fabAddIncidencia = findViewById(R.id.fabAddIncidencia);
+        fabAddIncidencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegistrosActivity.this, IncidenciasAdministrador.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void loadProducts() {
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_PRODUCTS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONArray array = new JSONArray(response);
+                            JSONArray jsonArray = new JSONArray(response);
 
-                            for (int i = 0; i < array.length(); i++) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                                JSONObject items = array.getJSONObject(i);
+                                int id = jsonObject.getInt("id_incidencia");
+                                String descripcion = jsonObject.getString("descripcion");
+                                String fecha = jsonObject.getString("fecha");
+                                String imagenReferencia = jsonObject.getString("imagenReferencia");
+                                String user = jsonObject.getString("user");
+                                String tipoIncidencia = jsonObject.getString("TipoIncidencia");
+                                String estadoIncidencia = jsonObject.getString("EstadoIncidencia");
 
-                                incidenciaList.add(new ItemList (
-                                        items.getInt("id_incidencia"),
-                                        items.getString("descripcion"),
-                                        items.getString("fecha"),
-                                        items.getString("imagenReferencia"),
-                                        items.getString("user"),
-                                        items.getString("TipoIncidencia"),
-                                        items.getString("EstadoIncidencia")
-                                ));
+                                incidenciaList.add(new ItemList(id, descripcion, fecha, imagenReferencia, user, tipoIncidencia, estadoIncidencia));
                             }
 
-                            IncidenciaAdapter adapter = new IncidenciaAdapter(
-                                    RegistrosActivity.this, incidenciaList, RegistrosActivity.this);
+                            IncidenciaAdapter adapter = new IncidenciaAdapter(RegistrosActivity.this, incidenciaList, RegistrosActivity.this);
                             recyclerView.setAdapter(adapter);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -74,7 +83,7 @@ public class RegistrosActivity extends AppCompatActivity
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        // Handle error
                     }
                 });
 

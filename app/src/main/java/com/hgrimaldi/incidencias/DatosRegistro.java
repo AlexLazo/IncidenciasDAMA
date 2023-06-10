@@ -25,34 +25,42 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DatosRegistro extends AppCompatActivity {
+    private int id;
+    private RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos_registro);
+        queue = Volley.newRequestQueue(this);
 
-        int id = getIntent().getIntExtra("id_incidencia", 0);
-        String name = getIntent().getStringExtra("descripcion");
-        String fecha = getIntent().getStringExtra("fecha");
-        String user = getIntent().getStringExtra("user");
-        String EstadoIncidencia = getIntent().getStringExtra("EstadoIncidencia");
-        String TipoIncidencia = getIntent().getStringExtra("TipoIncidencia");
-        String imageUrl = getIntent().getStringExtra("imagenReferencia");
+        Intent intent = getIntent();
+        if (intent != null) {
+            id = intent.getIntExtra("id_incidencia", 0);
+            String name = intent.getStringExtra("descripcion");
+            String fecha = intent.getStringExtra("fecha");
+            String user = intent.getStringExtra("user");
+            String EstadoIncidencia = intent.getStringExtra("EstadoIncidencia");
+            String TipoIncidencia = intent.getStringExtra("TipoIncidencia");
+            String imageUrl = intent.getStringExtra("imagenReferencia");
 
-        TextView tvName = findViewById(R.id.tvDescripcionRegis);
-        TextView tvFecha = findViewById(R.id.tvFechaRegis);
-        TextView tvUser = findViewById(R.id.tvUserRegis);
-        TextView tvEstado = findViewById(R.id.tvEstadoRegis);
-        TextView tvTipo = findViewById(R.id.tvTipoRegis);
-        ImageView imagen = findViewById(R.id.imgViewRegis);
+            TextView tvID = findViewById(R.id.tvIdRegis);
+            TextView tvName = findViewById(R.id.tvDescripcionRegis);
+            TextView tvFecha = findViewById(R.id.tvFechaRegis);
+            TextView tvUser = findViewById(R.id.tvUserRegis);
+            TextView tvEstado = findViewById(R.id.tvEstadoRegis);
+            TextView tvTipo = findViewById(R.id.tvTipoRegis);
+            ImageView imagen = findViewById(R.id.imgViewRegis);
 
-        tvName.setText(name);
-        tvFecha.setText(fecha);
-        tvUser.setText(user);
-        tvEstado.setText(EstadoIncidencia);
-        tvTipo.setText(TipoIncidencia);
+            tvID.setText(String.valueOf(id));
+            tvName.setText(name);
+            tvFecha.setText(fecha);
+            tvUser.setText(user);
+            tvEstado.setText(EstadoIncidencia);
+            tvTipo.setText(TipoIncidencia);
 
-        Picasso.get().load(imageUrl).into(imagen);
+            Picasso.get().load(imageUrl).into(imagen);
+        }
 
         Button btnEliminar, btnEditar;
 
@@ -70,37 +78,34 @@ public class DatosRegistro extends AppCompatActivity {
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteDataWithApi();
+                deleteDataWithApi(id);
             }
         });
     }
 
-    private void deleteDataWithApi() {
+    private void deleteDataWithApi(int id) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmación")
                 .setMessage("¿Seguro desea borrar estos datos?")
                 .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        performDataDeletion();
+                        performDataDeletion(id);
                     }
                 })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Do nothing
+                        // No hacer nada
                     }
                 })
                 .show();
     }
 
-    private void performDataDeletion() {
-        String apiUrl = "http://restapi-dama.000.pe/incidencia/delete.php";
-        int id = getIntent().getIntExtra("id_incidencia", 0);
+    private void performDataDeletion(int id) {
+        String apiUrl = "http://192.168.0.184/app_incidencias/incidencia/delete.php";
 
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        StringRequest deleteRequest = new StringRequest(Request.Method.DELETE, apiUrl,
+        StringRequest deleteRequest = new StringRequest(Request.Method.POST, apiUrl,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -118,11 +123,10 @@ public class DatosRegistro extends AppCompatActivity {
                     }
                 }) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                // Pass the id_incidencia parameter in the request headers
-                Map<String, String> headers = new HashMap<>();
-                headers.put("id_incidencia", String.valueOf(id));
-                return headers;
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("id_incidencia", String.valueOf(id));
+                return params;
             }
         };
 

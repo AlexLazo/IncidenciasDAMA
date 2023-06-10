@@ -1,8 +1,5 @@
 package com.hgrimaldi.incidencias;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +9,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -35,7 +35,7 @@ public class UsuariosActivity extends AppCompatActivity {
     MyAdapter adapter;
 
     public static ArrayList<Usuario> usuarioArrayList = new ArrayList<>();
-    String url = "https://damaapirest.000webhostapp.com/usuario/retrieve.php";
+    String url = "http://192.168.0.184/app_incidencias/usuario/retrieve.php";
     Usuario usuario;
 
     Context context;
@@ -62,33 +62,19 @@ public class UsuariosActivity extends AppCompatActivity {
                 builder.setItems(dialogItem, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-
                         switch (i){
-
                             case 0:
-
                                 startActivity(new Intent(getApplicationContext(),DetalleUsuarioActivity.class)
                                         .putExtra("position",position));
-
                                 break;
-
                             case 1:
                                 startActivity(new Intent(getApplicationContext(),ModificarUsuarioActivity.class)
                                         .putExtra("position",position));
-
                                 break;
-
                             case 2:
-
                                 deleteData(usuarioArrayList.get(position).getId_usuario());
-
                                 break;
-
-
                         }
-
-
-
                     }
                 });
 
@@ -101,7 +87,7 @@ public class UsuariosActivity extends AppCompatActivity {
         retrieveData();
     }
     private void deleteData(String id) {
-        StringRequest request = new StringRequest(Request.Method.POST, "https://damaapirest.000webhostapp.com/usuario/delete.php",
+        StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.0.184/app_incidencias/usuario/delete.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

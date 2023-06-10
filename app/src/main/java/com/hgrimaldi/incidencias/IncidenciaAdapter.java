@@ -1,36 +1,24 @@
 package com.hgrimaldi.incidencias;
 
 import android.content.Context;
-import android.os.Build;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Response;
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 class IncidenciaAdapter extends RecyclerView.Adapter<IncidenciaAdapter.ProductViewHolder> {
     private  final RecyclerViewInterface recyclerViewInterface;
     private Context mCtx;
     private List<ItemList> incidenciaList;
 
-    private String domaing_image = "https://damaapirest.000webhostapp.com/incidencia/fotos/";
+    private String domaing_image = "http://192.168.0.184/app_incidencias/incidencia/fotos/";
 
     public IncidenciaAdapter(Context mCtx, List<ItemList> incidenciaList,
                              RecyclerViewInterface recyclerViewInterface) {

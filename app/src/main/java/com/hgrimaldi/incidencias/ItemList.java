@@ -13,6 +13,7 @@ public class ItemList implements Serializable {
 
     public ItemList(int id_incidencia, String TipoIncidencia, String descripcion, String imagenReferencia
     , String fecha, String user, String EstadoIncidencia) {
+        this.id_incidencia = id_incidencia;
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.imagenReferencia = imagenReferencia;

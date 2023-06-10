@@ -4,10 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     Context context;
     private Button btnLogin;
 
-    private static final String API_URL = "https://damaapirest.000webhostapp.com/login/login.php";
+    private static final String API_URL = "http://192.168.0.184/app_incidencias/login/login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

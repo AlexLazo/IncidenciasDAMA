@@ -8,6 +8,19 @@
     tools:context=".DatosRegistro">
 
     <TextView
+        android:id="@+id/tvIdRegis"
+        android:layout_width="123dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="24dp"
+        android:text="ID"
+        android:textAlignment="center"
+        android:textColor="#D6CF7C"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewRegis" />
+
+    <TextView
         android:id="@+id/tvUserRegis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,19 +62,19 @@
         android:id="@+id/tvDescripcionRegis"
         android:layout_width="123dp"
         android:layout_height="39dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="4dp"
         android:text="Descripción"
         android:textColor="#D6CF7C"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewRegis" />
+        app:layout_constraintTop_toBottomOf="@+id/tvIdRegis" />
 
     <ImageView
         android:id="@+id/imgViewRegis"
         android:layout_width="258dp"
         android:layout_height="233dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
