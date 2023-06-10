@@ -38,7 +38,6 @@ public class RegistrosActivity extends AppCompatActivity implements RecyclerView
         incidenciaList = new ArrayList<>();
 
         loadProducts();
-
         FloatingActionButton fabAddIncidencia = findViewById(R.id.fabAddIncidencia);
         fabAddIncidencia.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +46,6 @@ public class RegistrosActivity extends AppCompatActivity implements RecyclerView
                 startActivity(intent);
             }
         });
-
     }
 
     private void loadProducts() {
