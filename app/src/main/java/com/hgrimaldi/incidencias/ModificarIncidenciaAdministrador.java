@@ -80,7 +80,7 @@ public class ModificarIncidenciaAdministrador extends AppCompatActivity {
 
         Picasso.get().load(imageUrl).into(img);
 
-        String url1 = "https://damaapirest.000webhostapp.com/incidencia/listarEstado.php";
+        String url1 = "https://damaapirest.000webhostapp.com/incidencia/incidencia/listarEstado.php";
 
 
         JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest(Request.Method.POST, url1, null, new Response.Listener<JSONObject>() {
@@ -143,7 +143,7 @@ public class ModificarIncidenciaAdministrador extends AppCompatActivity {
         progressDialog.setMessage("Actualizando....");
         progressDialog.show();
 
-        StringRequest request = new StringRequest(Request.Method.POST, "https://damaapirest.000webhostapp.com/incidencia/update.php",
+        StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.101.11:80/app_incidencias/incidencia/update.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
