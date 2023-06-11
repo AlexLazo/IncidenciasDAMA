@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtfecha" />
+        app:layout_constraintTop_toBottomOf="@+id/txtFechaModif" />
 
     <TextView
         android:id="@+id/textView15"
@@ -105,11 +105,11 @@
         android:background="@drawable/editext_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.524"
-        app:layout_constraintStart_toEndOf="@+id/txtfecha"
+        app:layout_constraintStart_toEndOf="@+id/txtFechaModif"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <EditText
-        android:id="@+id/txtfecha"
+        android:id="@+id/txtFechaModif"
         android:layout_width="132dp"
         android:layout_height="39dp"
         android:layout_marginStart="28dp"

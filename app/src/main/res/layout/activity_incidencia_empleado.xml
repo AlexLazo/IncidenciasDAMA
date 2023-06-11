@@ -137,7 +137,7 @@
         android:background="@drawable/editext_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.484"
-        app:layout_constraintStart_toEndOf="@+id/txtfecha"
+        app:layout_constraintStart_toEndOf="@+id/txtFechaModif"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <ImageView

@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.451"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtUser" />
+        app:layout_constraintTop_toBottomOf="@+id/txtUserModif" />
 
     <TextView
         android:id="@+id/textView7"
@@ -100,7 +100,7 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/editext_background"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtUser"
+        app:layout_constraintStart_toEndOf="@+id/txtUserModif"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <ImageView
@@ -110,11 +110,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtfecha"
+        app:layout_constraintTop_toBottomOf="@+id/txtFechaModif"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/txtUser"
+        android:id="@+id/txtUserModif"
         android:layout_width="127dp"
         android:layout_height="44dp"
         android:layout_marginStart="28dp"
@@ -136,11 +136,11 @@
         android:background="@drawable/editext_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.524"
-        app:layout_constraintStart_toEndOf="@+id/txtfecha"
+        app:layout_constraintStart_toEndOf="@+id/txtFechaModif"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <EditText
-        android:id="@+id/txtfecha"
+        android:id="@+id/txtFechaModif"
         android:layout_width="130dp"
         android:layout_height="56dp"
         android:layout_marginStart="28dp"

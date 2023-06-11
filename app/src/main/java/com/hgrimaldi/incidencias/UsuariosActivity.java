@@ -35,7 +35,7 @@ public class UsuariosActivity extends AppCompatActivity {
     MyAdapter adapter;
 
     public static ArrayList<Usuario> usuarioArrayList = new ArrayList<>();
-    String url = "http://192.168.0.184/app_incidencias/usuario/retrieve.php";
+    String url = "https://damaapirest.000webhostapp.com/usuario/retrieve.php";
     Usuario usuario;
 
     Context context;

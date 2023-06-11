@@ -103,7 +103,7 @@ public class DatosRegistro extends AppCompatActivity {
     }
 
     private void performDataDeletion(int id) {
-        String apiUrl = "http://192.168.0.184/app_incidencias/incidencia/delete.php";
+        String apiUrl = "https://damaapirest.000webhostapp.com/incidencia/delete.php";
 
         StringRequest deleteRequest = new StringRequest(Request.Method.POST, apiUrl,
                 new Response.Listener<String>() {

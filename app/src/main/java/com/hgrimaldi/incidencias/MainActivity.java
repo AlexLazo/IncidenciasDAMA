@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     Context context;
     private Button btnLogin;
 
-    private static final String API_URL = "http://192.168.0.184/app_incidencias/login/login.php";
+    private static final String API_URL = "https://damaapirest.000webhostapp.com/login/login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

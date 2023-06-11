@@ -1,26 +1,14 @@
 package com.hgrimaldi.incidencias;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.FileProvider;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -33,6 +21,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -47,15 +38,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class IncidenciasAdministrador extends AppCompatActivity {
@@ -87,10 +73,10 @@ public class IncidenciasAdministrador extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
 
-        usuario = findViewById(R.id.txtUser);
+        usuario = findViewById(R.id.txtUserModif);
         descripcion = findViewById(R.id.txtdescripcion);
         imageView = findViewById(R.id.imgFoto);
-        date = findViewById(R.id.txtfecha);
+        date = findViewById(R.id.txtFechaModif);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

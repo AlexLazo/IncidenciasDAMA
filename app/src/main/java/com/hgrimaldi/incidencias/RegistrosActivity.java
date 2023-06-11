@@ -1,10 +1,17 @@
 package com.hgrimaldi.incidencias;
 
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,25 +26,32 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-public class RegistrosActivity extends AppCompatActivity implements RecyclerViewInterface{
-    private static final String URL_PRODUCTS = "http://192.168.0.184/app_incidencias/incidencia/incidencia.php";
-    List<ItemList> incidenciaList;
-    RecyclerView recyclerView;
+
+public class RegistrosActivity extends AppCompatActivity implements RecyclerViewInterface {
+    private static final String URL_PRODUCTS = "https://damaapirest.000webhostapp.com/incidencia/incidencia.php";
+    private List<ItemList> incidenciaList;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registros);
 
-        //getting the recyclerview from xml
         recyclerView = findViewById(R.id.rvLista);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         incidenciaList = new ArrayList<>();
 
         loadProducts();
+
         FloatingActionButton fabAddIncidencia = findViewById(R.id.fabAddIncidencia);
         fabAddIncidencia.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +60,33 @@ public class RegistrosActivity extends AppCompatActivity implements RecyclerView
                 startActivity(intent);
             }
         });
+
+        FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDownloadConfirmationDialog();
+            }
+        });
+    }
+    private void showDownloadConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Descargar PDF");
+        builder.setMessage("Quieres descargar el PDF?");
+        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                new DownloadPdfTask(RegistrosActivity.this).execute();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing or handle other actions
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void loadProducts() {
@@ -81,7 +122,7 @@ public class RegistrosActivity extends AppCompatActivity implements RecyclerView
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Handle error
+                        error.printStackTrace();
                     }
                 });
 
@@ -95,11 +136,73 @@ public class RegistrosActivity extends AppCompatActivity implements RecyclerView
         intent.putExtra("id_incidencia", incidenciaList.get(position).getId_incidencia());
         intent.putExtra("descripcion", incidenciaList.get(position).getDescripcion());
         intent.putExtra("fecha", incidenciaList.get(position).getFecha());
+        intent.putExtra("imagenReferencia", incidenciaList.get(position).getImage());
         intent.putExtra("user", incidenciaList.get(position).getuser());
         intent.putExtra("TipoIncidencia", incidenciaList.get(position).getTipo());
         intent.putExtra("EstadoIncidencia", incidenciaList.get(position).getEstadoIncidencia());
-        intent.putExtra("imagenReferencia", incidenciaList.get(position).getImage());
 
         startActivity(intent);
+    }
+
+    private static class DownloadPdfTask extends AsyncTask<Void, Void, File> {
+        private Context context;
+
+        public DownloadPdfTask(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected File doInBackground(Void... voids) {
+            try {
+                URL url = new URL("https://damaapirest.000webhostapp.com/incidencia/generate_pdf.php");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setDoInput(true);
+                connection.connect();
+
+                if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    InputStream inputStream = connection.getInputStream();
+                    File pdfFile = new File(context.getExternalFilesDir(null), "incidencia.pdf");
+                    FileOutputStream fileOutputStream = new FileOutputStream(pdfFile);
+
+                    byte[] buffer = new byte[1024];
+                    int bytesRead;
+                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                        fileOutputStream.write(buffer, 0, bytesRead);
+                    }
+
+                    fileOutputStream.close();
+                    inputStream.close();
+
+                    return pdfFile;
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(File file) {
+            if (file != null) {
+                openPdfFile(file);
+            }
+        }
+
+        private void openPdfFile(File file) {
+            Uri fileUri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", file);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(fileUri, "application/pdf");
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            try {
+                context.startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

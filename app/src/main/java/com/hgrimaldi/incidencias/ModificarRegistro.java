@@ -1,14 +1,16 @@
 package com.hgrimaldi.incidencias;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ModificarRegistro extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modificar_registro);
+        setContentView(R.layout.activity_modificar_incidencia_administrador
+
+        );
     }
 }

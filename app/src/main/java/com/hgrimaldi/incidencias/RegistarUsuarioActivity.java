@@ -1,7 +1,5 @@
 package com.hgrimaldi.incidencias;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -61,8 +61,8 @@ public class RegistarUsuarioActivity extends AppCompatActivity {
         txtPassword  = findViewById(R.id.txtpassword);
         txtId_rol  = findViewById(R.id.rol);
         txtId_Estado = findViewById(R.id.estado);
-        String url1 = "http://192.168.0.184/app_incidencias/usuario/listarRol.php";
-        String url2 = "http://192.168.0.184/app_incidencias/usuario/listarEstado.php";
+        String url1 = "https://damaapirest.000webhostapp.com/usuario/listarRol.php";
+        String url2 = "https://damaapirest.000webhostapp.com/usuario/listarEstado.php";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url1, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
